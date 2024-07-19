@@ -85,12 +85,25 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-        
+          adjustCanvasSize();
+          window.addEventListener('resize', adjustCanvasSize);
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
+      
+      function adjustCanvasSize() {
+        var windowWidth = window.innerWidth;
+        var windowHeight = window.innerHeight;
+
+        if ((windowWidth === 1080 && (windowHeight === 2400 || windowHeight === 2520 || windowHeight === 2380)) || (windowWidth >= 1080 && (windowHeight >= 2400 && windowHeight <= 2520))) {
+          canvas.style.width = "100%";
+          canvas.style.height = "100%";
+        } 
+}
+
+
     </script>
   </body>
 </html>
