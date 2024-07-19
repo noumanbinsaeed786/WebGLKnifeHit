@@ -3,28 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | BubbleShooter</title>
+    <title>Unity WebGL Player | KnifeHit</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
-      #unity-body-style {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-      }
-      #unity-container {
-        height: 100%;
-        width: 100%;
-      }
-      #unity-canvas {
-        width: 100%;
-        height: 100%;
-        background-color: #030b1e;
-      }
+ #unity-body-style{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+ #unity-container{
+    height: 100%;
+    width: 100%;
+ }
+ #unity-canvas{
+    width: 100%;
+    height: 100%;
+    background-color: #030b1e;
+ }
+
     </style>
   </head>
   <body id="unity-body-style">
@@ -64,35 +61,12 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
-          adjustCanvasSize();
-          window.addEventListener('resize', adjustCanvasSize);
+        
         }).catch((message) => {
           alert(message);
         });
       };
       document.body.appendChild(script);
-
-      function adjustCanvasSize() {
-        var windowWidth = window.innerWidth;
-        var windowHeight = window.innerHeight;
-        var windowAspect = windowWidth / windowHeight;
-        var gameAspect = 1080 / 2400; // Adjust this to match your game's aspect ratio
-
-        if (windowWidth === 1080 && (windowHeight === 2400 || windowHeight === 2520 || windowHeight === 2380)) {
-          canvas.style.width = "100%";
-          canvas.style.height = "100%";
-        } else if (windowAspect < gameAspect) {
-          canvas.style.width = windowWidth + 'px';
-          canvas.style.height = (windowWidth / gameAspect) + 'px';
-        } else {
-          canvas.style.width = (windowHeight * gameAspect) + 'px';
-          canvas.style.height = windowHeight + 'px';
-        }
-
-        canvas.style.margin = 'auto';
-        container.style.width = canvas.style.width;
-        container.style.height = canvas.style.height;
-      }
     </script>
   </body>
 </html>
