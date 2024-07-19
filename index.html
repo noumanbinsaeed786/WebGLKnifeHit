@@ -3,39 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | BubbleShooter</title>
+    <title>Unity WebGL Player | KnifeHit</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
     <style>
-      #unity-body-style {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-      }
-      #unity-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-      }
-      #unity-canvas {
-        width: 100%;
-        height: 100%;
-        background-color: #030b1e;
-      }
-      @media only screen and (min-width: 1080px) and (max-height: 2520px) {
-        #unity-container {
-          height: 100%;
-          width: 100%;
-        }
-        #unity-canvas {
-          width: 100%;
-          height: 100%;
-        }
-      }
+ #unity-body-style{
+    display: flex;
+    justify-content: center;
+    margin: 100;
+}
+ #unity-container{
+    height: 100vh;
+    width: 100%;
+ }
+ #unity-canvas{
+    width: 100%;
+    height: 100%;
+    background-color: #030b1e;
+ }
+
     </style>
   </head>
   <body id="unity-body-style">
@@ -54,6 +40,14 @@
       var loadingBar = document.querySelector("#unity-loading-bar");
       var progressBarFull = document.querySelector("#unity-progress-bar-full");
 
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+    
+
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/KnifeHit.loader.js";
       var config = {
@@ -66,6 +60,22 @@
         productVersion: "1.0",
       };
 
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      // if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      //   container.className = "unity-mobile";
+      //   // Avoid draining fillrate performance on mobile devices,
+      //   // and default/override low DPI mode on mobile browsers.
+      //   config.devicePixelRatio = 1;
+      // } else {
+      //   canvas.style.width = "360px";
+      //   canvas.style.height = "640px";
+      // }
       loadingBar.style.display = "block";
 
       var script = document.createElement("script");
@@ -75,6 +85,7 @@
           progressBarFull.style.width = 100 * progress + "%";
         }).then((unityInstance) => {
           loadingBar.style.display = "none";
+        
         }).catch((message) => {
           alert(message);
         });
